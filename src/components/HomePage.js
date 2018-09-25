@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Grid } from 'react-bootstrap';
 import Header from './Header';
 import Title from './Title';
 import PopularHeroes from './PopularHeroes';
@@ -29,7 +30,9 @@ class HomePage extends React.Component {
                     </Title>
                 </Header>
                 <PopularHeroes />
-                <Footer />
+                <Grid>
+                    <Footer />
+                </Grid>
             </div>
         );
     }

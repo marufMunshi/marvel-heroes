@@ -22,33 +22,6 @@ module.exports = (env) => {
                     exclude: /node_modules/
                 },
                 {
-                    test: /\.s?css$/,
-                    use: CSSExtract.extract({
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'postcss-loader', options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'resolve-url-loader'
-                            },
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            }
-                        ]
-                    })
-                },
-                {
                     test: /\.(png|jpg|gif|svg)$/,
                     use: [
                         {

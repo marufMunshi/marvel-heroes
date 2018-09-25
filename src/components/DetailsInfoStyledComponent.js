@@ -98,6 +98,9 @@ export const ModalCharacterWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #555;
+    &:last-child {
+        border-bottom: 0;
+    }
 `;
 
 export const ModalBody = styled.div`

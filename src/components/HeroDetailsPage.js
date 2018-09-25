@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { Grid } from 'react-bootstrap';
 import Header from './Header';
 import HeaderInfo from './HeroPageHeaderInfo';
 import HeroDetailsInfo from './HeroDetailsInfo';
@@ -9,12 +10,12 @@ import { LoadingIcon } from './LoadingIcon';
 import marvelApiCall from '../api/marvelApi';
 import { addHero } from '../actions/fetchedHeroList';
 import { Nav, NavLink } from './Nav';
- 
+
 class HeroDetailsPage extends React.Component {
 
     async getData() {
         let id = this.props.match.params.id;
-        let data =  await marvelApiCall(`https://gateway.marvel.com/v1/public/characters/${id}`);
+        let data = await marvelApiCall(`https://gateway.marvel.com/v1/public/characters/${id}`);
         await this.props.addHero(data.results);
     }
 
@@ -38,19 +39,21 @@ class HeroDetailsPage extends React.Component {
                         </NavLink>
                     </Nav>
                     {
-                        heroData === undefined 
-                            ? 
-                            <LoadingIcon className="ion-ios-loop" theme={{color: '#fff'}}></LoadingIcon> 
-                            : 
-                            <HeaderInfo heroData={heroData}/>
+                        heroData === undefined
+                            ?
+                            <LoadingIcon className="ion-ios-loop" theme={{ color: '#fff' }}></LoadingIcon>
+                            :
+                            <HeaderInfo heroData={heroData} />
                     }
                 </Header>
 
                 {
                     heroData &&
-                    <HeroDetailsInfo heroData={heroData} id={this.props.match.params.id}/> 
+                    <HeroDetailsInfo heroData={heroData} id={this.props.match.params.id} />
                 }
-                <Footer />
+                <Grid>
+                    <Footer />
+                </Grid>
             </div>
         );
     }
@@ -69,5 +72,5 @@ const mapDispatchToProps = (dispatch) => {
         addHero: (data) => dispatch(addHero(...data))
     };
 };
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(HeroDetailsPage);

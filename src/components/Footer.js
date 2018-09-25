@@ -6,7 +6,7 @@ const Wrapper = styled.footer`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: space-between;
     height: 100px;
     padding-left: 15px;
     ${media.tablet`
