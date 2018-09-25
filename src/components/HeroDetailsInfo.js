@@ -39,7 +39,7 @@ class HeroDetails extends React.Component {
     }
 
     handleLoadMore() {
-        let collectionURI = this.props.heroData.comics.collectionURI;
+        let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
         let numberOfData = this.props.comics.data.length;
         this.getData(collectionURI, numberOfData, 6);
     }

@@ -1,9 +1,8 @@
-# Server Mold
 
-## Info about Marvel heroes using Marvel API with React, Redux and Styled-Component.
+### Info about Marvel heroes using Marvel API with React, Redux and Styled-Component.
 
 # Live
-Demo
+Demo https://marvel-heroes-munshi.herokuapp.com/
 # Built With
 
 * [React](https://reactjs.org/)
