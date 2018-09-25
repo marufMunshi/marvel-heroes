@@ -27,7 +27,7 @@ const ComicInfoModal = ({ comicInfo, handleReadMore, show }) => {
                         {
                             comicInfo.thumbnail &&
                             <Image
-                                src={`${comicInfo.thumbnail.path}/portrait_uncanny.${comicInfo.thumbnail.extension}`}
+                                src={`${comicInfo.thumbnail.path}/portrait_uncanny.${comicInfo.thumbnail.extension.replace(/http/g, 'https')}`}
                                 alt={comicInfo.title}>
                             </Image>
                         }
