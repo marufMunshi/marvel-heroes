@@ -81,6 +81,11 @@ class HeroDetails extends React.Component {
         }
     }
 
+    shorterDescription(str) {
+        let strWithOutHtml =  str.replace(/(<([^>]+)>)/ig, "");
+        return `${strWithOutHtml.substring(0, 180)} ...`;
+    }
+
     render() {
         return (
             <GlobalSection>
@@ -114,7 +119,7 @@ class HeroDetails extends React.Component {
                                                 </Image>
                                                 <Name>{item.title}</Name>
                                                 <Description>
-                                                    {item.description && item.description.replace(/(<([^>]+)>)/ig, "")}
+                                                    {item.description && this.shorterDescription(item.description) }
                                                 </Description>
                                                 <ReadMore onClick={this.handleReadMore} data-id={`${item.id}`}>
                                                     Read More

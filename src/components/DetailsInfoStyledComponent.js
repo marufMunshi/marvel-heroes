@@ -50,10 +50,6 @@ export const Description = styled.p`
     padding: 0 10px;
     margin: 10px 0;
     flex: 1 1 100%;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
 `;
 
 export const Button = styled.button`
