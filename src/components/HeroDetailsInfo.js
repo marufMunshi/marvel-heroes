@@ -19,7 +19,8 @@ class HeroDetails extends React.Component {
         super(props);
         this.state = {
             modal: false,
-            comicInfo: {}
+            comicInfo: {},
+            loading: false
         }
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.handleReadMore = this.handleReadMore.bind(this);
@@ -36,9 +37,19 @@ class HeroDetails extends React.Component {
             this.props.id,
             data.results
         );
+        this.setState(() => {
+            return {
+                loading: false
+            }
+        });
     }
 
     handleLoadMore() {
+        this.setState(() => {
+            return {
+                loading: true
+            }
+        });
         let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
         let numberOfData = this.props.comics.data.length;
         this.getData(collectionURI, numberOfData, 6);
@@ -112,6 +123,20 @@ class HeroDetails extends React.Component {
                                         </Col>
                                     )
                                 })
+                        }
+                    </Row>
+
+                    <Row>
+                        {
+                            this.state.loading 
+                                &&
+                            <IconWrapper>
+                                <LoadingIcon
+                                    className="ion-ios-loop"
+                                    theme={{ color: '#555' }}
+                                >
+                                </LoadingIcon>
+                            </IconWrapper>
                         }
                     </Row>
 
