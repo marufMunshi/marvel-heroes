@@ -13,6 +13,16 @@ import { Nav, NavLink } from './Nav';
 
 class HeroDetailsPage extends React.Component {
 
+    componentDidMount() {
+        this.getData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.match.params.id !== prevProps.match.params.id) {
+            this.getData();
+        }
+    }
+
     async getData() {
         let id = this.props.match.params.id;
         let data = await marvelApiCall(`https://gateway.marvel.com/v1/public/characters/${id}`);
@@ -20,7 +30,6 @@ class HeroDetailsPage extends React.Component {
     }
 
     render() {
-        this.getData();
         const heroData = this.props.heroData;
         return (
             <div>

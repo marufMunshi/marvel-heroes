@@ -35,7 +35,7 @@ class HeroDetails extends React.Component {
 
     async getData(url, offset, limit) {
         let data = await marvelApiCall(`${url}`, offset, limit);
-        await this.props.addComic(
+        this.props.addComic(
             this.props.id,
             data.results
         );
