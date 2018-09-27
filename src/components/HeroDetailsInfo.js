@@ -20,7 +20,9 @@ class HeroDetails extends React.Component {
         this.state = {
             modal: false,
             comicInfo: {},
-            loading: false
+            loading: false,
+            numberOfComics: this.props.heroData.comics.available,
+            allComicsLoaded: false
         }
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.handleReadMore = this.handleReadMore.bind(this);
@@ -52,7 +54,16 @@ class HeroDetails extends React.Component {
         });
         let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
         let numberOfData = this.props.comics.data.length;
-        this.getData(collectionURI, numberOfData, 6);
+
+        if (numberOfData <= this.state.numberOfComics) {
+            this.getData(collectionURI, numberOfData, 6);
+        } else {
+            this.setState(() => {
+                return {
+                    allComicsLoaded: true
+                }
+            });
+        }
     }
 
     handleReadMore(e) {
@@ -82,7 +93,7 @@ class HeroDetails extends React.Component {
     }
 
     shorterDescription(str) {
-        let strWithOutHtml =  str.replace(/(<([^>]+)>)/ig, "");
+        let strWithOutHtml = str.replace(/(<([^>]+)>)/ig, "");
         return `${strWithOutHtml.substring(0, 180)} ...`;
     }
 
@@ -119,7 +130,7 @@ class HeroDetails extends React.Component {
                                                 </Image>
                                                 <Name>{item.title}</Name>
                                                 <Description>
-                                                    {item.description && this.shorterDescription(item.description) }
+                                                    {item.description && this.shorterDescription(item.description)}
                                                 </Description>
                                                 <ReadMore onClick={this.handleReadMore} data-id={`${item.id}`}>
                                                     Read More
@@ -133,15 +144,23 @@ class HeroDetails extends React.Component {
 
                     <Row>
                         {
-                            this.state.loading 
+                            this.state.allComicsLoaded
+                                ?
+                                <IconWrapper>
+                                    <Title theme={{ fontSize: 160, color: 'purple' }}>
+                                        All Comics are Loaded
+                                    </Title>
+                                </IconWrapper>
+                                :
+                                this.state.loading
                                 &&
-                            <IconWrapper>
-                                <LoadingIcon
-                                    className="ion-ios-loop"
-                                    theme={{ color: '#555' }}
-                                >
-                                </LoadingIcon>
-                            </IconWrapper>
+                                <IconWrapper>
+                                    <LoadingIcon
+                                        className="ion-ios-loop"
+                                        theme={{ color: '#555' }}
+                                    >
+                                    </LoadingIcon>
+                                </IconWrapper>
                         }
                     </Row>
 
@@ -151,6 +170,7 @@ class HeroDetails extends React.Component {
                                 className="btn"
                                 theme={{ backgroundColor: '#EB974E' }}
                                 onClick={this.handleLoadMore}
+                                disabled={this.state.allComicsLoaded ? true : false}
                             >
                                 Load More
                             </Button>
