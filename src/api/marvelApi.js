@@ -1,7 +1,7 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
-export default async function marvelApiCall(url, offset = 0, limit = 20) {                                                                         
+export default async function marvelApiCall(url, limit = 20, offset = 0) {                                                                         
     const ts = new Date().getTime();
     const hash = CryptoJS.MD5(ts + process.env.PRIVATE_KEY + process.env.PUBLIC_KEY).toString();
 

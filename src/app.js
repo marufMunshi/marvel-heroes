@@ -1,18 +1,19 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/configureStore';
 import AppRouter from './routers/AppRouter';
 import { GlobalStyle } from './styles/GlobalStyle';
+import 'normalize.css';
 
 
 const jsx = (
     <div>
-        <GlobalStyle/>
+        <GlobalStyle />
         <Provider store={store}>
-            <AppRouter/>
+            <AppRouter />
         </Provider>
     </div>
 );
 
-ReactDom.render(jsx, document.getElementById('root'));
+ReactDOM.render(jsx, document.getElementById('root'));

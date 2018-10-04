@@ -8,12 +8,12 @@ const Style = createGlobalStyle`
 
     * {
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
 
     body {
         height: 100%;
-        margin: 0;
-        padding: 0;
         position: relative;
         font-family: ${props => props.theme.normalFont};
         background: ${props => props.theme.globalBackgroundColor};
@@ -23,6 +23,7 @@ const Style = createGlobalStyle`
 
     a {
         color: ${props => props.theme.linkColor};
+        text-decoration: none;
         &:hover {
             text-decoration: none;
             color: ${props => props.theme.linkColor};
@@ -30,26 +31,24 @@ const Style = createGlobalStyle`
         }
     }
 
-    address, p, figure, h1, h2, h3, h4, h5, h6 {
-        margin: 0;
-        padding: 0;
-    }
-
     h1, h2, h3, h4, h5, h6 {
+        margin: 0;
         font-family: ${props => props.theme.titleFont};
     }
 
     ul, ol {
-        padding: 0;
-        margin: 0;
         list-style: none;
     }
 `;
 
-export const GlobalStyle = () => {
+//using theme provider to pass theme
+// special children prop to pass children elements directly 
+
+export const GlobalStyle = (props) => {
     return (
         <ThemeProvider theme={theme}>
             <Style />
+            {/* {props.children} */}
         </ThemeProvider>
     );
 };

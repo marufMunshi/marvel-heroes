@@ -1,61 +1,30 @@
 import React from 'react';
-import { Grid } from 'react-bootstrap';
-import styled from 'styled-components';
-import { media } from '../styles/mediaQuery';
-import Image from './HeroPageImage';
-import Title from './Title';
+import Container from './Container';
+import { HeaderWrapper, HeroDescription, HeroPageImage } from './DetailsInfoStyledComponent';
+import { Title } from './GlobalStyledComponents';
 
 
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    ${media.smallLaptop`
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    `}
-`;
-
-const Description = styled.p`
-    font-size: 120%;
-    color: #fff;
-    word-spacing: 3px;
-    line-height: 140%;
-    margin: 20px 0 40px 0;
-    text-align: justify;
-    ${media.phablet`
-        font-size: 125%;
-    `}
-    ${media.tablet`
-        font-size: 130%;
-    `}
-    ${media.smallLaptop`
-        flex: 1 1 100%;
-        line-height: 160%;
-    `}
-`;
 
 const HeroPageHeaderInfo = ({ heroData }) => {
     return (
-        <Grid>
-            <Wrapper>
-                <Image
+        <Container>
+            <HeaderWrapper>
+                <HeroPageImage
                     src={`${heroData.thumbnail.path}/portrait_uncanny.${heroData.thumbnail.extension}`.replace(/http/g, 'https')}
                     alt={heroData.name}
                 />
-                <Title theme={{ fontSize: 180, color: '#fff' }}>
+                <Title heroName>
                     {heroData.name}
                 </Title>
                 {
                     heroData.description
                     &&
-                    <Description>
+                    <HeroDescription>
                         {heroData.description}
-                    </Description>
+                    </HeroDescription>
                 }
-            </Wrapper>
-        </Grid>
+            </HeaderWrapper>
+        </Container>
     );
 };
 

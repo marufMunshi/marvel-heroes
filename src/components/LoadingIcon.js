@@ -11,7 +11,7 @@ const roll = keyframes`
 `;
 
 const IconWrapper = styled.div`
-    height: 200px;
+    min-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;

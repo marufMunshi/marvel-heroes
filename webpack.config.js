@@ -22,6 +22,16 @@ module.exports = (env) => {
                     exclude: /node_modules/
                 },
                 {
+                    test: /\.css$/,
+                    use: CSSExtract.extract({
+                        use: [
+                            {
+                                loader: 'css-loader'
+                            }
+                        ]
+                    })
+                },
+                {
                     test: /\.(png|jpg|gif|svg)$/,
                     use: [
                         {

@@ -1,16 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-bootstrap';
-import Title from './Title';
-import GlobalSection from './GlobalSection';
+import Grid from '@material-ui/core/Grid';
+import { Title } from './GlobalStyledComponents';
 import { LoadingIcon, IconWrapper } from './LoadingIcon';
-
-import { Wrapper, Image, Name, ReadMore, Description, Button }
-    from './DetailsInfoStyledComponent';
-
+import { LoadButton } from './DetailsInfoStyledComponent';
+import ComicList from './ComicList';
 import ComicInfoModal from './ComicInfoModal';
 import marvelApiCall from '../api/marvelApi';
 import { addComic } from '../actions/fetchedHeroComicsList';
+import Container from './Container';
 
 
 class HeroDetails extends React.Component {
@@ -30,11 +28,11 @@ class HeroDetails extends React.Component {
 
     componentDidMount() {
         let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
-        this.getData(collectionURI, 0, 6);
+        this.getData(collectionURI, 6);
     }
 
-    async getData(url, offset, limit) {
-        let data = await marvelApiCall(`${url}`, offset, limit);
+    async getData(url, limit, offset=20) {
+        let data = await marvelApiCall(`${url}`, limit, offset);
         this.props.addComic(
             this.props.id,
             data.results
@@ -53,10 +51,11 @@ class HeroDetails extends React.Component {
             }
         });
         let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
-        let numberOfData = this.props.comics.data.length;
+        // Number of saved comics plus offset
+        let numberOfData = this.props.comics.data.length + 20;
 
         if (numberOfData <= this.state.numberOfComics) {
-            this.getData(collectionURI, numberOfData, 6);
+            this.getData(collectionURI, 6, numberOfData);
         } else {
             this.setState(() => {
                 return {
@@ -92,92 +91,77 @@ class HeroDetails extends React.Component {
         }
     }
 
-    shorterDescription(str) {
-        let strWithOutHtml = str.replace(/(<([^>]+)>)/ig, "");
-        return `${strWithOutHtml.substring(0, 180)} ...`;
-    }
-
     render() {
         return (
-            <GlobalSection>
+            <div>
                 {
                     this.state.modal &&
                     <ComicInfoModal show={this.state.modal} handleReadMore={this.handleReadMore} comicInfo={this.state.comicInfo} />
                 }
-                <Grid>
-                    <Row>
-                        <Title theme={{ fontSize: 160, color: '#555', paddingBottom: 25 }}>
+                <Container>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
+                    >
+                        <Title>
                             Comics ({this.props.heroData.comics.available})
                         </Title>
-                        {
-                            this.props.comics === undefined
-                                ?
-                                <IconWrapper>
-                                    <LoadingIcon
-                                        className="ion-ios-loop"
-                                        theme={{ color: '#555' }}
-                                    >
-                                    </LoadingIcon>
-                                </IconWrapper>
-                                :
-                                this.props.comics.data.map((item, i) => {
-                                    return (
-                                        <Col xs={12} sm={6} md={4} key={i}>
-                                            <Wrapper>
-                                                <Image
-                                                    src={`${item.thumbnail.path}/portrait_uncanny.${item.thumbnail.extension}`.replace(/http/g, 'https')}
-                                                    alt={item.title}>
-                                                </Image>
-                                                <Name>{item.title}</Name>
-                                                <Description>
-                                                    {item.description && this.shorterDescription(item.description)}
-                                                </Description>
-                                                <ReadMore onClick={this.handleReadMore} data-id={`${item.id}`}>
-                                                    Read More
-                                            </ReadMore>
-                                            </Wrapper>
-                                        </Col>
-                                    )
-                                })
-                        }
-                    </Row>
+                    </Grid>
+                    {
+                        this.props.comics === undefined
+                            ?
+                            <IconWrapper>
+                                <LoadingIcon
+                                    className="ion-ios-loop"
+                                    theme={{ color: '#555' }}
+                                >
+                                </LoadingIcon>
+                            </IconWrapper>
+                            :
+                            <ComicList data={this.props.comics.data}/>
+                    }
 
-                    <Row>
-                        {
-                            this.state.allComicsLoaded
-                                ?
-                                <IconWrapper>
-                                    <Title theme={{ fontSize: 160, color: 'purple' }}>
-                                        All Comics are Loaded
+                    {
+                        this.state.allComicsLoaded
+                            ?
+                            <IconWrapper>
+                                <Title theme={{ fontSize: 160, color: 'purple' }}>
+                                    All Comics are Loaded
                                     </Title>
-                                </IconWrapper>
-                                :
-                                this.state.loading
-                                &&
-                                <IconWrapper>
-                                    <LoadingIcon
-                                        className="ion-ios-loop"
-                                        theme={{ color: '#555' }}
-                                    >
-                                    </LoadingIcon>
-                                </IconWrapper>
-                        }
-                    </Row>
+                            </IconWrapper>
+                            :
+                            this.state.loading
+                            &&
+                            <IconWrapper>
+                                <LoadingIcon
+                                    className="ion-ios-loop"
+                                    theme={{ color: '#555' }}
+                                >
+                                </LoadingIcon>
+                            </IconWrapper>
+                    }
 
-                    <Row>
-                        <Col xsOffset={5} xs={6}>
-                            <Button
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
+                    >
+                        <Grid item xs={1}>
+                            <LoadButton
                                 className="btn"
                                 theme={{ backgroundColor: '#EB974E' }}
                                 onClick={this.handleLoadMore}
                                 disabled={this.state.allComicsLoaded ? true : false}
                             >
                                 Load More
-                            </Button>
-                        </Col>
-                    </Row>
-                </Grid>
-            </GlobalSection>
+                            </LoadButton>
+                        </Grid>
+                    </Grid>
+                </Container>
+            </div>
         );
     }
 }

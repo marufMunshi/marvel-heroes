@@ -1,58 +1,120 @@
 import styled from 'styled-components';
+import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 import { media } from '../styles/mediaQuery';
 
-export const Wrapper = styled.div`
-    min-height: 680px;
+
+export const HeaderWrapper = styled.div`
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background-color: #fff;
+    margin-top: 80px;
+    ${media.smallLaptop`
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    `}
+`;
+
+export const HeroDescription = styled.p`
+    font-size: 115%;
+    color: #fff;
+    word-spacing: 3px;
+    line-height: 140%;
+    margin: 20px 0 40px 0;
+    text-align: justify;
+    ${media.phablet`
+        font-size: 125%;
+    `}
+    ${media.tablet`
+        font-size: 130%;
+    `}
+    ${media.smallLaptop`
+        flex: 1 1 100%;
+        line-height: 160%;
+    `}
+`;
+
+
+export const HeroPageImage = styled.img`
+    width: 150px;
     height: auto;
-    width: 100%;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    padding: 20px 0;
-    transition: all .5s ease-in;
-    &:hover{
-        box-shadow: 0px 5px 12px -2px #898989;
+    border: 3px solid #fff;
+    border-radius: 5px;
+`;
+
+export const Wrapper = styled(Card)`
+    height: 100%;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .5s ease-in;
+    &:hover {
+        box-shadow: 0 3px 13px -2px #a9a9a9;
     }
 `;
 
-export const Image = styled.img`
-    width: 200px;
-    height: auto;
+export const ComicsHeader = styled.header`
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid #e5e5e5;
 `;
 
-export const Name = styled.p`
-    flex: 1 1 100%;
+
+export const ComicImage = styled.img`
+    width: 50px;
+    height: 75px;
+`;
+
+export const ComicTitleWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+`;
+
+export const ComicTitle = styled.p`
+    flex-grow: 1;
     text-align: center;
-    padding: 10px 10px;
-    font-size: 150%;
-    border-bottom: ${props => props.modal ? `0` : `1px solid #555`};
+    padding: 0 0 0 20px;
+    font-size: 120%;
 `;
 
-export const ReadMore = styled.p`
-    font-size: 105%;
-    text-align: left;
-    padding: 10px 0 0 10px;
-    border-top: 1px solid #555;
-    flex: 1 1 100%;
-    cursor: pointer;
-    color: #0056b3;
+export const ComicPublishedDate = styled.p`
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px 0 0 20px;
+    font-size: 100%;
+`;
+
+
+export const ComicsFooter = styled.footer`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px
+`;
+
+export const ReadMore = styled(Button)`
+    font-size: 105% !important;
+    font-family: ${props => props.theme.normalFont} !important;
+    color: #555 !important;
+    font-weight: normal !important;
+    text-transform: none !important;
+    word-spacing: 3px;
 `;
 
 export const Description = styled.p`
-    font-size: 120%;
-    text-align: justify;
-    line-height: 145%;
+    padding: 20px;
+    flex-grow: 1;
+    font-size: 110%;
     word-spacing: 3px;
-    padding: 0 10px;
-    margin: 10px 0;
-    flex: 1 1 100%;
+    border-bottom: 1px solid #e5e5e5;
 `;
 
-export const Button = styled.button`
+export const LoadButton = styled.button`
     text-align: center;
     font-size: 120%;
     word-spacing: 3px;
