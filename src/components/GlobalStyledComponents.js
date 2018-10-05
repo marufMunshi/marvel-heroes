@@ -30,7 +30,7 @@ export const GlobalWrapper = styled(Card)`
 
 export const Title = styled.h1`
     color: ${props => props.heroName ? '#fff' : '#555'};
-    font-size: ${props => props.heroName ? '2rem' : '1.5rem'};
+    font-size: ${props => props.heroName ? '1.3rem' : '1.5rem'};
     font-weight: normal;
     line-height: 145%;
     text-align: center;

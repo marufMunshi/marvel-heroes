@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import { Title } from './GlobalStyledComponents';
 import { LoadingIcon, IconWrapper } from './LoadingIcon';
-import { LoadButton } from './DetailsInfoStyledComponent';
+import { LoadButton, LoadButtonWrapper } from './DetailsInfoStyledComponent';
 import ComicList from './ComicList';
 import ComicInfoModal from './ComicInfoModal';
 import marvelApiCall from '../api/marvelApi';
@@ -66,29 +66,14 @@ class HeroDetails extends React.Component {
     }
 
     handleReadMore(e) {
-        let id;
-
-        if (e === undefined) {
-            id = undefined;
-        } else {
-            id = e.target.dataset.id;
-        }
-
-        if (id === undefined) {
-            this.setState((prevState) => {
-                return {
-                    modal: !prevState.modal
-                }
-            });
-        } else {
-            let comicInfo = this.props.comics.data.find((item) => item.id == id);
-            this.setState((prevState) => {
-                return {
-                    modal: !prevState.modal,
-                    comicInfo: { ...comicInfo }
-                }
-            });
-        }
+        let id = e.currentTarget.dataset.id;
+        let comicInfo = this.props.comics.data.find((item) => item.id == id);
+        this.setState((prevState) => {
+            return {
+                modal: !prevState.modal,
+                comicInfo: { ...comicInfo }
+            }
+        });
     }
 
     render() {
@@ -96,7 +81,7 @@ class HeroDetails extends React.Component {
             <div>
                 {
                     this.state.modal &&
-                    <ComicInfoModal show={this.state.modal} handleReadMore={this.handleReadMore} comicInfo={this.state.comicInfo} />
+                    <ComicInfoModal modal={this.state.modal} handleReadMore={this.handleReadMore} comicInfo={this.state.comicInfo} />
                 }
                 <Container>
                     <Grid
@@ -120,7 +105,7 @@ class HeroDetails extends React.Component {
                                 </LoadingIcon>
                             </IconWrapper>
                             :
-                            <ComicList data={this.props.comics.data}/>
+                            <ComicList data={this.props.comics.data} handleReadMore={this.handleReadMore}/>
                     }
 
                     {
@@ -145,19 +130,18 @@ class HeroDetails extends React.Component {
 
                     <Grid
                         container
-                        direction="row"
-                        justify="center"
-                        alignItems="center"
+                        spacing={40}
                     >
-                        <Grid item xs={1}>
-                            <LoadButton
-                                className="btn"
-                                theme={{ backgroundColor: '#EB974E' }}
-                                onClick={this.handleLoadMore}
-                                disabled={this.state.allComicsLoaded ? true : false}
-                            >
-                                Load More
-                            </LoadButton>
+                        <Grid item xs={12}>
+                            <LoadButtonWrapper>
+                                <LoadButton
+                                    variant="contained"
+                                    onClick={this.handleLoadMore}
+                                    disabled={this.state.allComicsLoaded ? true : false}
+                                >
+                                    Load More
+                                </LoadButton>
+                            </LoadButtonWrapper>
                         </Grid>
                     </Grid>
                 </Container>
@@ -181,4 +165,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeroDetails);
-

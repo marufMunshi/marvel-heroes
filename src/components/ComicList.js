@@ -4,7 +4,7 @@ import moment from 'moment';
 import 
     { 
         Wrapper, ComicsHeader, ComicImage, ComicTitle, 
-        ComicsFooter, ReadMore, Description, ComicTitleWrapper,
+        ComicsFooter, OutLinedButton, Description, ComicTitleWrapper,
         ComicPublishedDate
      }
 from './DetailsInfoStyledComponent';
@@ -46,9 +46,9 @@ class ComicList extends React.Component {
                                         {item.description && this.shorterText(item.description, 80)}
                                     </Description>
                                     <ComicsFooter>
-                                        <ReadMore variant="outlined">
+                                        <OutLinedButton variant="outlined" onClick={this.props.handleReadMore} data-id={`${item.id}`}>
                                             Read More
-                                    </ReadMore>
+                                        </OutLinedButton>
                                     </ComicsFooter>
                                 </Wrapper>
                             </Grid>

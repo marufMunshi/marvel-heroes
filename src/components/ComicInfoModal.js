@@ -1,100 +1,99 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import { Image, Name, Button, ModalHeaderWrapper, ModalDescription, ModalCharacterWrapper }
-//     from './DetailsInfoStyledComponent';
-
-// // import { Modal } from 'react-bootstrap';
-
-// const stripId = (url) => {
-//     const regex = /(\d{3,})/g;
-//     const id = url.match(regex);
-//     return id[0];
-// }
-
-// const ComicInfoModal = ({ comicInfo, handleReadMore, show }) => {
-//     return (
-//         <div>
-//             <Modal 
-//                 show={show} 
-//                 onHide={handleReadMore}
-//                 bsSize="large"
-//                 aria-labelledby="contained-modal-title-lg"
-            
-//             >
-
-//                 <Modal.Header closeButton>
-//                     <ModalHeaderWrapper>
-//                         {
-//                             comicInfo.thumbnail &&
-//                             <Image
-//                                 src={`${comicInfo.thumbnail.path}/portrait_uncanny.${comicInfo.thumbnail.extension.replace(/http/g, 'https')}`}
-//                                 alt={comicInfo.title}>
-//                             </Image>
-//                         }
-//                         <Name modal>{comicInfo.title}</Name>
-//                     </ModalHeaderWrapper>
-//                 </Modal.Header>
-
-//                 <Modal.Body>
-//                     {
-//                         comicInfo.description &&
-//                         <div>
-//                             <Name>Description</Name>
-//                             <ModalDescription>{comicInfo.description}</ModalDescription>
-//                         </div>
-//                     }
-//                 </Modal.Body>
+import React from 'react';
+import { Link } from 'react-router-dom';
+import {
+    ModalWrapper, ModalImage, ModalTitle, ModalHeader,
+    ModalDescriptionWrapper, ModalDescription, ModalCharacterWrapper,
+    OutLinedButton
+}
+from './DetailsInfoStyledComponent';
 
 
-//                 <Modal.Body>
-//                     <Name>Specification</Name>
-//                     {
-//                         <ModalDescription>Issue: {comicInfo.issueNumber == 0 ? 'Unknown' : comicInfo.issueNumber}</ModalDescription>
-//                     }
-//                     {
-//                         <ModalDescription>
-//                             Number of Pages: {comicInfo.pageCount == 0 ? 'Unknown' : comicInfo.pageCount}
-//                         </ModalDescription>
-//                     }
-//                 </Modal.Body>
+const stripId = (url) => {
+    const regex = /(\d{3,})/g;
+    const id = url.match(regex);
+    return id[0];
+};
 
-//                 <Modal.Body>
-//                     <Name>Characters</Name>
-//                         {
-//                             comicInfo.characters.items.length > 0 
-//                             &&
-//                             comicInfo.characters.items.map((item, i) => {
-//                                 return (
-//                                 <ModalCharacterWrapper key={i}>
-//                                     <ModalDescription>{item.name}</ModalDescription>
-//                                         <Link to={ `/hero/${stripId(item.resourceURI)}` }>
-//                                         <Button
-//                                             className="btn"
-//                                             theme={{ backgroundColor: '#F4B350' }}
-//                                             onClick={handleReadMore}
-//                                         >
-//                                             View
-//                                         </Button>
-//                                         </Link>
-//                                 </ModalCharacterWrapper>
-//                                 )
-//                             })
-//                         }
-//                 </Modal.Body>
 
-//                 <Modal.Footer>
-//                     <Button
-//                         className="btn"
-//                         theme={{ backgroundColor: '#D91E18' }}
-//                         onClick={handleReadMore}
-//                     >
-//                         Close
-//                     </Button>
-//                 </Modal.Footer>
+const ComicInfoModal = ({ modal, handleReadMore, comicInfo }) => {
+    return (
+        <div>
+            <ModalWrapper anchor="right" open={modal} onClose={handleReadMore}>
+                <div
+                    tabIndex={0}
+                    role="button"
+                    onClick={handleReadMore}
+                    onKeyDown={handleReadMore}
+                >
+                    <ModalHeader>
+                        <ModalImage
+                            src={`${comicInfo.thumbnail.path}/portrait_medium.${comicInfo.thumbnail.extension.replace(/http/g, 'https')}`}
+                            alt={comicInfo.title}
+                        />
+                        <ModalTitle>{comicInfo.title}</ModalTitle>
+                    </ModalHeader>
 
-//             </Modal>
-//         </div>
-//     );
-// };
+                    <ModalDescriptionWrapper>
+                        <ModalDescription>
+                            {
+                                comicInfo.description
+                                    ?
+                                    comicInfo.description
+                                    :
+                                    'No description available at this moment.'
+                            }
+                        </ModalDescription>
+                    </ModalDescriptionWrapper>
 
-// export default ComicInfoModal;
+                    <ModalDescriptionWrapper>
+                        <ModalTitle other >Specification</ModalTitle>
+                        <ModalDescription other>
+                            {
+                                comicInfo.issueNumber == 0
+                                    ?
+                                    `Issue: Unknown`
+                                    :
+                                    `Issue: ${comicInfo.issueNumber}`
+                            }
+                        </ModalDescription>
+
+                        <ModalDescription other>
+                            {
+                                comicInfo.pageCount == 0
+                                    ?
+                                    `Number of Pages: Unknown`
+                                    :
+                                    `Number of Pages: ${comicInfo.pageCount}`
+                            }
+                        </ModalDescription>
+                    </ModalDescriptionWrapper>
+
+                    <ModalDescriptionWrapper>
+                        <ModalTitle other >Characters</ModalTitle>
+                        {
+                            comicInfo.characters.items.length > 0
+                                ?
+                                comicInfo.characters.items.map((item, i) => {
+                                    return (
+                                        <ModalCharacterWrapper key={i}>
+                                            <ModalDescription other>{item.name}</ModalDescription>
+                                            <Link to={`/hero/${stripId(item.resourceURI)}`}>
+                                                <OutLinedButton variant="outlined">
+                                                    View
+                                                </OutLinedButton>
+                                            </Link>
+                                        </ModalCharacterWrapper>
+                                    )
+                                })
+                                :
+                                'No characters available at this moment'
+                        }
+                    </ModalDescriptionWrapper>
+
+                </div>
+            </ModalWrapper>
+        </div>
+    );
+};
+
+export default ComicInfoModal;

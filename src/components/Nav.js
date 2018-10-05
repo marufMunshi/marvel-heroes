@@ -14,13 +14,12 @@ const NavWrapper = styled.div`
     transition: all .4s ease-in;
 
     &.scroll-wrapper {
+        z-index: 2;
         background-color: rgba(255, 255, 255, 1);
         position: fixed;
         box-shadow: 0px 0px 6px -1px #555;
-        z-index: 2;
         p {
            color: #555; 
-           z-index: 2;
         }
     }
 `;
@@ -51,7 +50,6 @@ const NavLink = styled.p`
         color: inherit;
         i {
             font-size: 130%;
-            vertical-align: middle;
         }
     }
 `;
@@ -67,6 +65,10 @@ class Nav extends React.Component {
         window.addEventListener('scroll', this.handleScrollNav);
     }
 
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.handleScrollNav);
+    }
+
     handleScrollNav() {
         const node = this.navRef.current;
         if(window.scrollY >= node.offsetHeight + 250) {
@@ -74,7 +76,6 @@ class Nav extends React.Component {
         } else {
             node.classList.remove('scroll-wrapper');
         }
-        // console.log(node.offsetHeight);
     }
     render() {
         return (
@@ -83,7 +84,7 @@ class Nav extends React.Component {
                     <NavLink>
                         <Link to={`/`}>
                             Home
-                    </Link>
+                        </Link>
                     </NavLink>
 
                     <NavLink>

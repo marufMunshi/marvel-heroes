@@ -18,9 +18,13 @@ const HeroPageHeaderInfo = ({ heroData }) => {
                 </Title>
                 {
                     heroData.description
-                    &&
+                    ?
                     <HeroDescription>
                         {heroData.description}
+                    </HeroDescription>
+                    :
+                    <HeroDescription>
+                        Description for {heroData.name} is not available at this moment.
                     </HeroDescription>
                 }
             </HeaderWrapper>
