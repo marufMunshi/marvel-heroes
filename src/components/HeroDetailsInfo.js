@@ -29,8 +29,10 @@ class HeroDetails extends React.Component {
 
     componentDidMount() {
         if(this._isMounted) {
-            let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
-            this.getData(collectionURI, 6);
+            if(this.props.comics === undefined) {
+                let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
+                this.getData(collectionURI, 6);
+            }
         }
     }
 
