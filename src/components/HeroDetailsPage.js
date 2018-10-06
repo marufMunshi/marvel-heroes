@@ -11,8 +11,19 @@ import { GlobalSection } from './GlobalStyledComponents';
 
 class HeroDetailsPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this._isMounted = true;
+    }
+
     componentDidMount() {
-        this.getData();
+        if(this._isMounted) {
+            this.getData();
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     componentDidUpdate(prevProps) {

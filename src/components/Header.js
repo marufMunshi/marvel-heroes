@@ -15,7 +15,7 @@ const StyledHeader = styled.header`
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    min-height: 60vh;
+    min-height: ${props => props.homePage ? '40vh' : '40vh'};
     position: relative;
 `;
 

@@ -22,13 +22,20 @@ class HeroDetails extends React.Component {
             numberOfComics: this.props.heroData.comics.available,
             allComicsLoaded: false
         }
+        this._isMounted = true;
         this.handleLoadMore = this.handleLoadMore.bind(this);
         this.handleReadMore = this.handleReadMore.bind(this);
     }
 
     componentDidMount() {
-        let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
-        this.getData(collectionURI, 6);
+        if(this._isMounted) {
+            let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
+            this.getData(collectionURI, 6);
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     async getData(url, limit, offset=20) {
@@ -37,31 +44,34 @@ class HeroDetails extends React.Component {
             this.props.id,
             data.results
         );
-        this.setState(() => {
-            return {
-                loading: false
-            }
-        });
+        if(this._isMounted) {
+            this.setState(() => {
+                return {
+                    loading: false
+                }
+            });
+        }
     }
 
     handleLoadMore() {
-        this.setState(() => {
-            return {
-                loading: true
-            }
-        });
-        let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
-        // Number of saved comics plus offset
-        let numberOfData = this.props.comics.data.length + 20;
-
-        if (numberOfData <= this.state.numberOfComics) {
-            this.getData(collectionURI, 6, numberOfData);
-        } else {
+        if(this._isMounted) {
             this.setState(() => {
                 return {
-                    allComicsLoaded: true
+                    loading: true
                 }
             });
+            let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
+            // Number of saved comics plus offset
+            let numberOfData = this.props.comics.data.length + 20;
+            if (numberOfData <= this.state.numberOfComics) {
+                this.getData(collectionURI, 6, numberOfData);
+            } else {
+                this.setState(() => {
+                    return {
+                        allComicsLoaded: true
+                    }
+                });
+            }
         }
     }
 

@@ -43,7 +43,7 @@ class ComicList extends React.Component {
                                         </ComicTitleWrapper>
                                     </ComicsHeader>
                                     <Description>
-                                        {item.description && this.shorterText(item.description, 80)}
+                                        {item.description && this.shorterText(item.description, 100)}
                                     </Description>
                                     <ComicsFooter>
                                         <OutLinedButton variant="outlined" onClick={this.props.handleReadMore} data-id={`${item.id}`}>

@@ -38,24 +38,25 @@ export const Title = styled.h1`
     padding: ${props => props.heroName ? '8px 0 0 0' : '30px 0'};
     border-bottom: ${props => props.heroName ? '1px solid #fafafa' : '0'};
     ${media.phablet`
-        font-size: 1.7rem;
+        font-size: ${props => props.heroName ? '1.5rem' : '1.7rem'};
     `}
     ${media.tablet`
-        font-size: 1.9rem;
+        font-size: ${props => props.heroName ? '1.7rem' : '1.9rem'};
     `}
     ${media.smallLaptop`
-        font-size: 2.1rem;
-        padding: 40px 0;
+        margin-left: ${props => props.heroName ? '30px' : '0'}
+        padding: ${props => props.heroName ? '0' : '40px 0'}
+        font-size: ${props => props.heroName ? '1.9rem' : '2.1rem'};
     `}
 
     ${media.laptop`
-        font-size: 2.3rem;
-        padding: 50px 0;
+        padding: ${props => props.heroName ? '0' : '50px 0'}
+        font-size: ${props => props.heroName ? '2.1rem' : '2.3rem'};
     `}
 
     ${media.desktop`
-        font-size: 2.5rem;
-        padding: 60px 0;
+        padding: ${props => props.heroName ? '0' : '60px 0'}
+        font-size: ${props => props.heroName ? '2.3rem' : '2.5rem'};
     `}
 
     &::after {

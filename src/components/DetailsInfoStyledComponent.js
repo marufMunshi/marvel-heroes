@@ -15,6 +15,7 @@ export const HeaderWrapper = styled.div`
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: space-between;
     `}
 `;
 
@@ -83,6 +84,20 @@ export const ComicTitle = styled.p`
     text-align: center;
     padding: 0 0 0 20px;
     font-size: 120%;
+    ${media.phablet`
+        font-size: 125%;
+    `}
+    ${media.tablet`
+        font-size: 130%;
+    `}
+
+    ${media.laptop`
+        font-size: 140%;
+    `}
+
+    ${media.desktop`
+        font-size: 145%;
+    `}
 `;
 
 export const ComicPublishedDate = styled.p`
@@ -90,6 +105,17 @@ export const ComicPublishedDate = styled.p`
     text-align: center;
     padding: 10px 0 0 20px;
     font-size: 100%;
+    ${media.tablet`
+        font-size: 105%;
+    `}
+
+    ${media.laptop`
+        font-size: 110%;
+    `}
+
+    ${media.desktop`
+        font-size: 115%;
+    `}
 `;
 
 
@@ -107,6 +133,17 @@ export const OutLinedButton = styled(Button)`
     font-weight: normal !important;
     text-transform: none !important;
     word-spacing: 3px;
+    ${media.tablet`
+        font-size: 110%;
+    `}
+
+    ${media.laptop`
+        font-size: 115%;
+    `}
+
+    ${media.desktop`
+        font-size: 120%;
+    `}
 `;
 
 export const Description = styled.p`
@@ -115,6 +152,16 @@ export const Description = styled.p`
     font-size: 110%;
     word-spacing: 3px;
     border-bottom: 1px solid #e5e5e5;
+    ${media.tablet`
+        font-size: 115%;
+    `}
+    ${media.laptop`
+        font-size: 120%;
+    `}
+
+    ${media.desktop`
+        font-size: 125%;
+    `}
 `;
 
 export const LoadButtonWrapper = styled.div`
@@ -135,6 +182,17 @@ export const LoadButton = styled(Button)`
     &:focus {
         color: #fff !important;
     }
+    ${media.tablet`
+        font-size: 115%;
+    `}
+
+    ${media.laptop`
+        font-size: 120%;
+    `}
+
+    ${media.desktop`
+        font-size: 125%;
+    `}
 `;
 
 // Modal Components
@@ -142,6 +200,17 @@ export const LoadButton = styled(Button)`
 export const ModalWrapper = styled(({...rest}) => <Drawer {...rest} classes={{paper: 'paper-override'}} />)`
   & .paper-override {
     width: 70%;
+    ${media.tablet`
+        width: 65%;
+    `}
+
+    ${media.laptop`
+        width: 60%;
+    `}
+
+    ${media.desktop`
+        width: 55%;
+    `}
   }
 `
 
@@ -167,6 +236,18 @@ export const ModalTitle = styled.h1`
     line-height: 1.6;
     padding-top: ${props => props.other ? '0' : '20px'};
     padding-bottom: ${props => props.other ? '10px' : '0'};
+    ${media.tablet`
+        font-size: 120%;
+    `}
+
+    ${media.laptop`
+        font-size: 125%;
+    `}
+
+    ${media.desktop`
+        font-size: 130%;
+    `}
+
 `;
 
 export const ModalDescriptionWrapper = styled.div`
@@ -179,6 +260,17 @@ export const ModalDescription = styled.p`
     line-height: 1.5;
     text-align: ${props => props.other ? 'left' : 'center'};
     word-spacing: 3px;
+    ${media.tablet`
+        font-size: 110%;
+    `}
+
+    ${media.laptop`
+        font-size: 115%;
+    `}
+
+    ${media.desktop`
+        font-size: 120%;
+    `}
 `;
 
 export const ModalCharacterWrapper = styled.div`
