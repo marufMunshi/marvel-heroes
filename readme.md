@@ -10,7 +10,7 @@ Demo https://marvel-heroes-munshi.herokuapp.com/
 * [React Redux](https://github.com/reduxjs/react-redux)
 * [React Router](https://github.com/ReactTraining/react-router)
 * [styled-components](https://www.styled-components.com/)
-* [React Bootstrap 3](https://react-bootstrap.github.io/)
+* [Material-UI](https://material-ui.com/)
 * [Webpack](https://webpack.js.org/)
 * [Marvel API](https://developer.marvel.com/)
 
@@ -19,7 +19,7 @@ Demo https://marvel-heroes-munshi.herokuapp.com/
 * Followed React file structure pattern.
 * Managed state by Redux
 * Used styled-components for styling purpose.
-* Used Grid, Modal and Button from React bootstrap 3
+* Used Grid, Drawer and Button from Material-UI
 * For module bundling used Webpack
 
 # How to use
