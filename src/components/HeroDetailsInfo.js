@@ -18,7 +18,7 @@ class HeroDetails extends React.Component {
         this.state = {
             modal: false,
             comicInfo: {},
-            loading: false,
+            loading: true,
             numberOfComics: this.props.heroData.comics.available,
             allComicsLoaded: false
         }
@@ -107,37 +107,19 @@ class HeroDetails extends React.Component {
                         </Title>
                     </Grid>
                     {
-                        this.props.comics === undefined
-                            ?
-                            <IconWrapper>
-                                <LoadingIcon
-                                    className="ion-ios-loop"
-                                    theme={{ color: '#555' }}
-                                >
-                                </LoadingIcon>
-                            </IconWrapper>
-                            :
-                            <ComicList data={this.props.comics.data} handleReadMore={this.handleReadMore}/>
+                        this.props.comics &&
+                        <ComicList data={this.props.comics.data} handleReadMore={this.handleReadMore}/>
                     }
 
                     {
                         this.state.allComicsLoaded
-                            ?
-                            <IconWrapper>
-                                <Title theme={{ fontSize: 160, color: 'purple' }}>
-                                    All Comics are Loaded
-                                    </Title>
-                            </IconWrapper>
-                            :
-                            this.state.loading
                             &&
-                            <IconWrapper>
-                                <LoadingIcon
-                                    className="ion-ios-loop"
-                                    theme={{ color: '#555' }}
-                                >
-                                </LoadingIcon>
-                            </IconWrapper>
+                        <IconWrapper>
+                            <Title theme={{ fontSize: 160, color: 'purple' }}>
+                                All Comics are Loaded
+                            </Title>
+                        </IconWrapper>
+                            
                     }
 
                     <Grid
@@ -145,15 +127,26 @@ class HeroDetails extends React.Component {
                         spacing={40}
                     >
                         <Grid item xs={12}>
+                        {
+                            this.state.loading
+                            ?
+                            <IconWrapper>
+                                <LoadingIcon
+                                    className="ion-ios-loop"
+                                    theme={{ color: '#555' }}
+                                >
+                                </LoadingIcon>
+                            </IconWrapper>
+                            :
                             <LoadButtonWrapper>
                                 <LoadButton
                                     variant="contained"
                                     onClick={this.handleLoadMore}
-                                    disabled={this.state.allComicsLoaded ? true : false}
                                 >
                                     Load More
                                 </LoadButton>
                             </LoadButtonWrapper>
+                        }
                         </Grid>
                     </Grid>
                 </Container>
