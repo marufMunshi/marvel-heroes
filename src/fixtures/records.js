@@ -16,10 +16,10 @@ const popularHeroList = [
         }
     },
     {
-        id: 1009211,
-        name: "Bucky",
+        id: 1010740,
+        name: "Winter Soldier",
         thumbnail: {
-            path: "https://i.annihil.us/u/prod/marvel/i/mg/d/03/4dc8478464008",
+            path: "https://i.annihil.us/u/prod/marvel/i/mg/d/03/5265478293c1e",
             extension: "jpg"
         }
     },

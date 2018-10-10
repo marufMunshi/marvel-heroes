@@ -32,6 +32,12 @@ class HeroDetails extends React.Component {
             if(this.props.comics === undefined) {
                 let collectionURI = this.props.heroData.comics.collectionURI.replace(/http/g, 'https');
                 this.getData(collectionURI, 6);
+            } else {
+                this.setState(() => {
+                    return {
+                        loading: false
+                    }
+                });
             }
         }
     }
