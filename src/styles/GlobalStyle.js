@@ -1,6 +1,7 @@
 import React from 'react';
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from './theme';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const Style = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Montserrat');
@@ -47,8 +48,11 @@ const Style = createGlobalStyle`
 export const GlobalStyle = (props) => {
     return (
         <ThemeProvider theme={theme}>
-            <Style />
-            {/* {props.children} */}
+            <div>
+                <CssBaseline />
+                <Style />
+                {props.children}
+            </div>
         </ThemeProvider>
     );
 };

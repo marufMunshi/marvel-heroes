@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { store } from './store/configureStore';
 import AppRouter from './routers/AppRouter';
 import { GlobalStyle } from './styles/GlobalStyle';
-import 'normalize.css';
 
 
 const jsx = (
