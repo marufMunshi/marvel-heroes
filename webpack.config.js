@@ -11,7 +11,7 @@ module.exports = (env) => {
   return {
     entry: ["@babel/polyfill", "./src/app.js"],
     output: {
-      path: path.resolve("./build"),
+      path: path.join(__dirname, "public", "dist"),
       filename: "bundle.js",
     },
     module: {
